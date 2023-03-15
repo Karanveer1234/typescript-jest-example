@@ -1,13 +1,15 @@
-name: Unit Tests
+name: Node.js CI
 
 on: [pull_request]
 
 jobs:
-  test:
+  tests:
     runs-on: windows-latest
+
     strategy: 
-    matrix:
-    node-version: [16.x]
+     matrix:
+      node-version: [16.x]
+  
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{matrix.node-version}}
@@ -15,7 +17,6 @@ jobs:
         with:
           node-version: ${{matrix.node-version}}
       - name: npm install
-      - run: npm ci
+        run: npm ci
       - name: tests
-      - run: npm test
-
+        run: npm test
